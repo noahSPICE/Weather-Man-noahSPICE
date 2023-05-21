@@ -10,18 +10,18 @@
 </head>
 
 <body>
-    <div>
+    <div class="topBanner">
         <header id="header">
-            <h1 class="pageHeader">Weekly Weather Forecast</h1>
+            <h1 class="pageHeader">Weather Dashboard</h1>
         </header>
     </div>
-    <div class="leftContent">
-        <h3 class="cityName">Type City Name Below:</h3>
-        <div class="buttonDiv">
-            <input type="text" id="cname" name="cname" placeholder="Cleveland" size="29"><br><br>
-            <button id="submitButton" type="submit" value="Submit">Submit</button>
-        </div>
-        <hr width="14.5%">
+    <div class="searchContainer">
+        <label class="cityName" for="search">Type City and State Name Below:</label> <br>
+        <input class="searchBox" type="search" id="search" name="cname" placeholder="Cleveland, Ohio" size="29"><br><br>
+        <button id="submitButton" type="button" value="Submit" onclick="getWeatherData()">Submit</button>
+    </div>
+    <hr width="14.5%">
+    <div class="searchHistory">
 
     </div>
     <script src="js/script.js"></script>
