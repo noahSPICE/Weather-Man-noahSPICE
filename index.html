@@ -15,15 +15,32 @@
             <h1 class="pageHeader">Weather Dashboard</h1>
         </header>
     </div>
+    <div id="main">
     <div class="searchContainer">
         <label class="cityName" for="search">Type City and State Name Below:</label> <br>
         <input class="searchBox" type="search" id="search" name="cname" placeholder="Cleveland, Ohio" size="29"><br><br>
         <button id="submitButton" type="button" value="Submit" onclick="getWeatherData()">Submit</button>
+        <hr width="75%">
+        <div class="searchHistory">
+            <ul id="historyList"></ul>
+        </div>
     </div>
-    <hr width="14.5%">
-    <div class="searchHistory">
-
+    <div id="weatherContainer">
+        <div id="currentWeather">
+            <h2 id="location"></h2>
+            <h3 id="currentTemp"></h3>
+            <h3 id="currentHumidity"></h3>
+            <h3 id="currentWind"></h3>
+        </div>
+        <div id="forecast">
+            <div id="day0" class="forecastDay"></div>
+            <div id="day1" class="forecastDay"></div>
+            <div id="day2" class="forecastDay"></div>
+            <div id="day3" class="forecastDay"></div>
+            <div id="day4" class="forecastDay"></div>
+        </div>
     </div>
+</div>
     <script src="js/script.js"></script>
 </body>
 

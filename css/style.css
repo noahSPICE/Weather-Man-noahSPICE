@@ -49,3 +49,26 @@ hr {
 .searchBox {
     margin-top: 12px;
 }
+
+#main {
+    display: flex;
+}
+
+.searchContainer {
+    width: 25%;
+}
+
+#weatherContainer {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+}
+
+#forecast {
+    display: flex;
+    height: 100%;
+}
+
+.forecastDay {
+    width: 20%;
+}
