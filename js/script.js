@@ -19,7 +19,7 @@ function getLocationWeather(latitude, longitude) {
       cityStateWeather.currentTemp = data.main.temp;
       cityStateWeather.currentHumidity = data.main.humidity;
       cityStateWeather.currentWind = data.wind.speed;
-      cityStateWeather.currentDate = new Date();
+      cityStateWeather.currentDate = new Date().toLocaleString();
     });
 
   let requestURL =
@@ -46,8 +46,10 @@ function getLocationWeather(latitude, longitude) {
         temp = weatherData.main.temp;
         wind = weatherData.wind.speed;
         date = weatherData.dt_txt;
+        let trimmedDate = date.substring(0, 10);
+        let formattedDate = new Date(trimmedDate).toDateString();
         let dateWeatherInfo = {
-          date: date,
+          date: formattedDate,
           temp: temp,
           humidity: humidity,
           wind: wind,
@@ -89,13 +91,14 @@ function storeLocationWeather(cityStateWeather) {
   let newListItem = document.createElement("li");
   let newButton = document.createElement("button");
   newButton.setAttribute("onClick", "updateWeatherSection(this)");
+  // newButton.classList.add('submitButton');
   newButton.textContent = cityStateWeather.location;
   newListItem.appendChild(newButton);
   document.getElementById("historyList").appendChild(newListItem);
 
   // update main weather div EXAMPLE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-document.getElementById("location").textContent = 
-"Current weather conditions in " + cityStateWeather.location;
+  document.getElementById("location").textContent =
+    "Weather conditions in " + cityStateWeather.location + " on "+ cityStateWeather.currentDate;
 
   document.getElementById("currentTemp").textContent =
     "Current temperature is " + cityStateWeather.currentTemp + " °F";
@@ -104,7 +107,10 @@ document.getElementById("location").textContent =
     "Current wind speed is " + cityStateWeather.currentWind + " mph";
 
   document.getElementById("currentHumidity").textContent =
-  "Current humidity is " + cityStateWeather.currentHumidity + '%';
+    "Current humidity is " + cityStateWeather.currentHumidity + "%";
+
+  
+  populateForecast(cityStateWeather);
 }
 
 function updateWeatherSection(button) {
@@ -115,8 +121,8 @@ function updateWeatherSection(button) {
   );
   console.log(cityStateWeather);
 
-  document.getElementById("location").textContent = 
-"Current weather conditions in " + cityStateWeather.location;
+  document.getElementById("location").textContent =
+    "Weather conditions in " + cityStateWeather.location + " on " + cityStateWeather.currentDate;
 
   document.getElementById("currentTemp").textContent =
     "Current temperature is " + cityStateWeather.currentTemp + " °F";
@@ -125,8 +131,38 @@ function updateWeatherSection(button) {
     "Current wind speed is " + cityStateWeather.currentWind + " mph";
 
   document.getElementById("currentHumidity").textContent =
-  "Current humidity is " + cityStateWeather.currentHumidity + '%';
-  // Grab main weather div and update with weatherData properties (location, date info, etc.)
+    "Current humidity is " + cityStateWeather.currentHumidity + "%";
+
+  populateForecast(cityStateWeather);
+
+}
+
+function populateForecast(cityStateWeather) {
+  for (i = 0; i < cityStateWeather.dateInfos.length; i++) {
+    let dateInfo = cityStateWeather.dateInfos[i];
+    console.log(dateInfo);
+    let dayDiv = document.getElementById("day" + i);
+    let newList = document.createElement("ul");
+    let dateListItem = document.createElement("li");
+    let dateHeader = document.createElement("h4");
+    dateHeader.textContent = dateInfo.date;
+    dateListItem.appendChild(dateHeader);
+    newList.appendChild(dateListItem);
+    let tempListItem = document.createElement("li");
+    tempListItem.textContent = 'Temperature: ' + dateInfo.temp + " °F";
+    newList.appendChild(tempListItem);
+    let humidListItem = document.createElement("li");
+    humidListItem.textContent ='Humidity: ' + dateInfo.humidity + "%";
+    newList.appendChild(humidListItem);
+    let windListItem = document.createElement("li");
+    windListItem.textContent ='Wind Speed: ' + dateInfo.wind + " mph";
+    newList.appendChild(windListItem);
+    if (dayDiv.childNodes && dayDiv.childNodes.length === 0) {
+      dayDiv.appendChild(newList);
+    } else {
+      dayDiv.replaceChild(newList, dayDiv.firstChild);
+    }
+  }
 }
 
 function loadPage() {

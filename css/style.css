@@ -14,7 +14,7 @@
     height: 30px;
 }
 
-#submitButton {
+.submitButton {
     flex: 1 1 auto;
     height: 40px;
     padding-left: 77px;
@@ -62,13 +62,48 @@ hr {
     display: flex;
     flex-direction: column;
     width: 75%;
+    border: #3498DB;
+    border-radius: 20px;
 }
 
 #forecast {
     display: flex;
     height: 100%;
+    font-family: sans-serif;
+    text-align: center;
 }
 
 .forecastDay {
     width: 20%;
+}
+
+#historyList button {
+    flex: 1 1 auto;
+    height: 40px;
+    padding-left: 77px;
+    padding-right: 77px;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    background-image: linear-gradient(to right, #AED6F1 0%, #85C1E9 51%, #3498DB 100%);
+    border-radius: 10px;
+    border: 1;
+    border-color: WHITE;
+    margin-bottom: 10px;
+    min-width: 75%;
+    max-width: 95%;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#currentWeather {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: #e1f2fd;
 }
